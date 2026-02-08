@@ -14,7 +14,7 @@ import Login from "./pages/Login";
 import { AuthProvider } from "./context/AuthContext";
 import Signup from "./pages/Signup";
 import Products from "./pages/Products";
-import { ProtectedRoute } from "./components/ProtectedRoute";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Orders from "./pages/Orders";
 import Contact from "./pages/Contact";
 

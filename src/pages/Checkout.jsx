@@ -2,6 +2,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { clearCart } from "../redux/cartSlice";
+import { validateForm } from "../utils/validation";
 
 export default function Checkout() {
   const cartItems = useSelector((state) => state.cart.items);
@@ -30,44 +31,51 @@ export default function Checkout() {
   const [success, setSuccess] = useState(false);
 
   // Validate form fields
-  const validate = () => {
-    const newErrors = {};
-    if (!formData.fullName.trim()) newErrors.fullName = "Full Name is required";
-    if (!formData.email.trim()) newErrors.email = "Email is required";
-    else if (!/\S+@\S+\.\S+/.test(formData.email))
-      newErrors.email = "Invalid email format";
-    if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
-    if (!formData.address.trim()) newErrors.address = "Address is required";
-    if (!formData.city.trim()) newErrors.city = "City is required";
-    if (!formData.state.trim()) newErrors.state = "State is required";
-    if (!formData.zip.trim()) newErrors.zip = "ZIP Code is required";
-
-    // Payment validation
-    if (!formData.cardNumber.trim())
-      newErrors.cardNumber = "Card Number is required";
-    else if (!/^\d{16}$/.test(formData.cardNumber.replace(/\s+/g, "")))
-      newErrors.cardNumber = "Card Number must be 16 digits";
-
-    if (!formData.cardExpiry.trim())
-      newErrors.cardExpiry = "Expiry Date is required";
-    else if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(formData.cardExpiry))
-      newErrors.cardExpiry = "Expiry must be MM/YY";
-
-    if (!formData.cardCVV.trim()) newErrors.cardCVV = "CVV is required";
-    else if (!/^\d{3}$/.test(formData.cardCVV))
-      newErrors.cardCVV = "CVV must be 3 digits";
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   if (!validate()) return;
+  //   setSubmitting(true);
+
+  //   // Mock order processing
+  //   setTimeout(() => {
+  //     setSubmitting(false);
+  //     setSuccess(true);
+  //     dispatch(clearCart()); // Clear cart after successful order
+  //   }, 1500);
+  //   // Get existing orders from localStorage
+  //   const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+
+  //   // Create new order
+  //   const newOrder = {
+  //     id: Date.now(),
+  //     items: cartItems,
+  //     total: cartTotal,
+  //     date: new Date().toISOString(),
+  //   };
+
+  //   // Save updated orders array
+  //   localStorage.setItem(
+  //     "orders",
+  //     JSON.stringify([newOrder, ...existingOrders]),
+  //   );
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validate()) return;
+
+    // Use the utility for validation
+    const validationErrors = validateForm(formData);
+    setErrors(validationErrors);
+
+    // Stop submission if there are errors
+    if (Object.keys(validationErrors).length > 0) return;
+
     setSubmitting(true);
 
     // Mock order processing
@@ -76,6 +84,7 @@ export default function Checkout() {
       setSuccess(true);
       dispatch(clearCart()); // Clear cart after successful order
     }, 1500);
+
     // Get existing orders from localStorage
     const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
 

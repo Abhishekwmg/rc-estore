@@ -19,7 +19,6 @@ export default function ProductDetail() {
 
   const handleAddToCart = () => {
     if (!user) {
-      // If not logged in, redirect to login page
       navigate("/login");
       return;
     }
@@ -27,7 +26,6 @@ export default function ProductDetail() {
     alert("Product added to cart!");
   };
 
-  // Fetch product details on mount
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -50,7 +48,6 @@ export default function ProductDetail() {
 
   return (
     <div className="p-6 flex flex-col md:flex-row gap-6">
-      {/* Product Image */}
       <div className="md:w-1/2">
         <img
           src={product.thumbnail || product.image}
@@ -59,7 +56,6 @@ export default function ProductDetail() {
         />
       </div>
 
-      {/* Product Info */}
       <div className="md:w-1/2 flex flex-col gap-4">
         <h2 className="text-2xl font-bold">{product.title}</h2>
         <p className="text-gray-700 dark:text-gray-300">
@@ -67,7 +63,6 @@ export default function ProductDetail() {
         </p>
         <p className="text-xl font-semibold">${product.price}</p>
 
-        {/* Add to Cart Button */}
         <button
           className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
           onClick={handleAddToCart}
