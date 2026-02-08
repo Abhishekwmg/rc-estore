@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, removeFromCart } from "../redux/cartSlice";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
   const cartItems = useSelector((state) => state.cart.items);
@@ -70,7 +71,9 @@ export default function Cart() {
               </button>
             </div>
 
-            <div className="font-bold">${item.price * item.quantity}</div>
+            <div className="font-bold">
+              ${(item.price * item.quantity).toFixed(2)}
+            </div>
           </div>
         ))}
       </div>
@@ -78,6 +81,16 @@ export default function Cart() {
       {/* Total */}
       <div className="mt-6 text-right text-xl font-bold">
         Total: ${totalPrice.toFixed(2)}
+      </div>
+
+      {/* Checkout Button */}
+      <div className="mt-4 text-right">
+        <Link
+          to="/checkout"
+          className="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 transition"
+        >
+          Proceed to Checkout
+        </Link>
       </div>
     </div>
   );

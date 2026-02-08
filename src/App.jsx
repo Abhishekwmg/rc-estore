@@ -15,6 +15,8 @@ import { AuthProvider } from "./context/AuthContext";
 import Signup from "./pages/Signup";
 import Products from "./pages/Products";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import Orders from "./pages/Orders";
+import Contact from "./pages/Contact";
 
 // const router = createBrowserRouter([
 //   {
@@ -65,6 +67,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/orders",
+        element: (
+          <ProtectedRoute>
+            <Orders />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: "/checkout",
         element: (
           <ProtectedRoute>
@@ -73,6 +83,7 @@ const router = createBrowserRouter([
         ),
       },
       { path: "/products", element: <Products /> },
+      { path: "/contact", element: <Contact /> },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <Signup /> },
     ],

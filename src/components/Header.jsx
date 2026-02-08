@@ -101,6 +101,12 @@ export const Header = () => {
             >
               Cart ({cartCount})
             </Link>
+            <Link
+              to="/orders"
+              className="hover:text-indigo-500 transition-colors"
+            >
+              Orders
+            </Link>
 
             <div className="flex items-center space-x-2">
               {profileImage ? (
