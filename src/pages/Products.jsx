@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useProducts } from "../hooks/useProducts";
 import ProductCard from "../components/ProductCard";
+import ProductSkeleton from "../components/ProductSkeleton";
 
 export default function Products() {
   const { products, loading, error, fetchAllProducts, search } = useProducts();
@@ -49,7 +50,15 @@ export default function Products() {
       />
 
       {/* Loading / Error / Empty States */}
-      {loading && <p>Loading products...</p>}
+      {/* {loading && <p>Loading products...</p>} */}
+      {loading && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {Array.from({ length: 8 }).map((_, idx) => (
+            <ProductSkeleton key={idx} />
+          ))}
+        </div>
+      )}
+
       {error && <p>Error: {error}</p>}
       {!loading && !products.length && <p>No products found.</p>}
 

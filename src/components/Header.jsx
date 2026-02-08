@@ -3,12 +3,16 @@ import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { User } from "lucide-react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export const Header = () => {
   const { darkMode, dispatch } = useTheme();
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const cartItems = useSelector((state) => state.cart.items);
+  const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -93,13 +97,9 @@ export const Header = () => {
           <>
             <Link
               to="/cart"
-              style={{
-                backgroundColor: "var(--button-bg)",
-                color: "var(--button-text)",
-              }}
-              className="px-3 py-2 rounded"
+              className="px-3 py-2 rounded bg-green-600 text-white"
             >
-              Cart
+              Cart ({cartCount})
             </Link>
 
             <div className="flex items-center space-x-2">
