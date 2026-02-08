@@ -18,39 +18,6 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import Orders from "./pages/Orders";
 import Contact from "./pages/Contact";
 
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <Layout />,
-//     children: [
-//       { index: true, element: <Home /> },
-//       { path: "/product/:id", element: <ProductDetail /> },
-//       {
-//         path: "/cart",
-//         element: (
-//           <ProtectedRoute>
-//             <Cart />
-//           </ProtectedRoute>
-//         ),
-//       },
-//       {
-//         path: "/checkout",
-//         element: (
-//           <ProtectedRoute>
-//             <Checkout />
-//           </ProtectedRoute>
-//         ),
-//       },
-//       {
-//         path: "/products",
-//         element: <Products />,
-//       },
-//       { path: "/login", element: <Login /> },
-//       { path: "/signup", element: <Signup /> },
-//     ],
-//   },
-// ]);
-
 const router = createBrowserRouter([
   {
     path: "/",
