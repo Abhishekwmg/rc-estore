@@ -1,9 +1,9 @@
 // src/hooks/useProducts.js
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import {
-  getAllProducts,
+  fetchProducts,
   searchProducts,
-  getProductById,
+  fetchProductById,
 } from "../api/products";
 
 /**
@@ -19,7 +19,7 @@ export const useProducts = () => {
     setLoading(true);
     setError(null);
     try {
-      const data = await getAllProducts();
+      const data = await fetchProducts(); // ✅ updated
       setProducts(data);
     } catch (err) {
       setError(err.message || "Failed to fetch products");
@@ -43,11 +43,11 @@ export const useProducts = () => {
   }, []);
 
   // Fetch single product by id
-  const fetchProductById = useCallback(async (id) => {
+  const fetchProductByIdHook = useCallback(async (id) => {
     setLoading(true);
     setError(null);
     try {
-      const data = await getProductById(id);
+      const data = await fetchProductById(id); // ✅ updated
       return data;
     } catch (err) {
       setError(err.message || "Failed to fetch product");
@@ -63,6 +63,6 @@ export const useProducts = () => {
     error,
     fetchAllProducts,
     search,
-    fetchProductById,
+    fetchProductById: fetchProductByIdHook,
   };
 };
