@@ -1,24 +1,17 @@
-// src/api/products.js
-const BASE_URL = "https://dummyjson.com/products";
+import {BASE_URL} from '../utils/constants'
 
-/**
- * Fetch all products
- */
 export const fetchProducts = async () => {
   try {
     const response = await fetch(`${BASE_URL}?limit=100`);
     if (!response.ok) throw new Error("Failed to fetch products");
     const data = await response.json();
-    return data.products; // array of products
+    return data.products;
   } catch (error) {
     console.error("fetchProducts error:", error);
     throw error;
   }
 };
 
-/**
- * Fetch single product by ID
- */
 export const fetchProductById = async (id) => {
   try {
     const response = await fetch(`${BASE_URL}/${id}`);
@@ -31,33 +24,27 @@ export const fetchProductById = async (id) => {
   }
 };
 
-/**
- * Search products by query
- */
 export const searchProducts = async (query) => {
   try {
-    if (!query) return fetchProducts(); // if query empty, return all products
+    if (!query) return fetchProducts();
     const response = await fetch(
       `${BASE_URL}/search?q=${encodeURIComponent(query)}`,
     );
     if (!response.ok) throw new Error("Failed to search products");
     const data = await response.json();
-    return data.products || []; // always return an array
+    return data.products || [];
   } catch (error) {
     console.error("searchProducts error:", error);
-    return []; // return empty array on error
+    return [];
   }
 };
 
-/**
- * Fetch all categories (for filters)
- */
 export const fetchCategories = async () => {
   try {
     const response = await fetch(`${BASE_URL}/categories`);
     if (!response.ok) throw new Error("Failed to fetch categories");
     const data = await response.json();
-    return data; // array of category strings
+    return data;
   } catch (error) {
     console.error("fetchCategories error:", error);
     return [];

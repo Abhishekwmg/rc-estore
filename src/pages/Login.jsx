@@ -1,81 +1,3 @@
-// import { useState } from "react";
-// import { useAuth } from "../context/AuthContext";
-// import { googleProvider } from "../firebase/firebase";
-// import { useNavigate } from "react-router-dom";
-
-// export default function Login() {
-//   const { loginWithEmail, loginWithGoogle } = useAuth();
-//   const navigate = useNavigate();
-
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [error, setError] = useState("");
-
-//   const handleEmailLogin = async (e) => {
-//     e.preventDefault();
-//     setError("");
-//     try {
-//       await loginWithEmail(email, password);
-//       navigate("/");
-//     } catch (err) {
-//       setError(err.message);
-//     }
-//   };
-
-//   const handleGoogleLogin = async () => {
-//     try {
-//       await loginWithGoogle(googleProvider);
-//       navigate("/");
-//     } catch (err) {
-//       setError(err.message);
-//     }
-//   };
-
-//   return (
-//     <div
-//       className="max-w-md mx-auto mt-10 p-6 rounded shadow"
-//       style={{ backgroundColor: "var(--card-bg)", color: "var(--card-text)" }}
-//     >
-//       <h2 className="text-xl font-bold mb-4">Login</h2>
-
-//       {error && <p className="mb-2 text-red-500">{error}</p>}
-
-//       <form onSubmit={handleEmailLogin} className="flex flex-col space-y-4">
-//         <input
-//           type="email"
-//           placeholder="Email"
-//           value={email}
-//           onChange={(e) => setEmail(e.target.value)}
-//           className="p-2 rounded"
-//           style={{
-//             backgroundColor: "var(--input-bg)",
-//             color: "var(--input-text)",
-//             borderColor: "var(--input-border)",
-//           }}
-//         />
-//         <input
-//           type="password"
-//           placeholder="Password"
-//           value={password}
-//           onChange={(e) => setPassword(e.target.value)}
-//           className="p-2 rounded"
-//           style={{
-//             backgroundColor: "var(--input-bg)",
-//             color: "var(--input-text)",
-//             borderColor: "var(--input-border)",
-//           }}
-//         />
-//         <button type="submit">Login</button>
-//       </form>
-
-//       <div className="mt-4 flex flex-col space-y-2">
-//         <button onClick={handleGoogleLogin}>Login with Google</button>
-//       </div>
-//     </div>
-//   );
-// }
-
-// src/pages/Login.jsx
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -83,6 +5,8 @@ import Card from "../components/ui/Card";
 import InputField from "../components/ui/InputField";
 import Button from "../components/ui/Button";
 import Alert from "../components/ui/Alert";
+import googleIcon from "../assets/google.png";
+import {Loader} from 'lucide-react'
 
 export default function Login() {
   const { loginWithEmail, loginWithGoogle } = useAuth();
@@ -91,10 +15,12 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleEmailLogin = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
     try {
       await loginWithEmail(email, password);
       navigate("/");
@@ -104,19 +30,28 @@ export default function Login() {
   };
 
   const handleGoogleLogin = async () => {
+    setError("");
+    setLoading(true);
     try {
       await loginWithGoogle();
       navigate("/");
     } catch (err) {
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <Card className="max-w-md mx-auto mt-10 p-6">
-      <h2 className="text-xl font-bold mb-4">Login</h2>
+    <Card className="max-w-md w-full mx-auto mt-10 p-6 sm:p-8 md:p-10">
+      <h2 className="text-xl sm:text-2xl font-bold mb-4 text-center">Login</h2>
 
       {error && <Alert type="error" message={error} />}
+      {loading && (
+        <p className="text-center text-sm text-gray-500 mb-4">
+          Logging you in...
+        </p>
+      )}
 
       <form onSubmit={handleEmailLogin} className="flex flex-col space-y-4">
         <InputField
@@ -125,6 +60,7 @@ export default function Login() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          className="w-full text-sm sm:text-base"
         />
         <InputField
           type="password"
@@ -132,16 +68,32 @@ export default function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          className="w-full text-sm sm:text-base"
         />
-
-        <Button type="submit">Login</Button>
+        <div className="mt-4 flex justify-center gap-2">
+          <Button
+            type="submit"
+            className="px-4 py-2 text-sm flex-1 sm:flex-none"
+            disabled={loading}
+          >
+             {loading ? <Loader /> : "Login"}
+          </Button>
+          <Button
+            type="button"
+            onClick={handleGoogleLogin}
+            variant="secondary"
+            disabled={loading}
+            className="px-4 py-2 text-sm flex-1 sm:flex-none flex items-center justify-center gap-2"
+          >
+            <img
+              src={googleIcon}
+              alt="login-with-google"
+              className="w-4 h-4 sm:w-5 sm:h-5"
+            />
+            Google
+          </Button>
+        </div>
       </form>
-
-      <div className="mt-4 flex flex-col space-y-2">
-        <Button type="button" onClick={handleGoogleLogin} variant="secondary">
-          Login with Google
-        </Button>
-      </div>
     </Card>
   );
 }

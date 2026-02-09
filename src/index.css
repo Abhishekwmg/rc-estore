@@ -1,19 +1,12 @@
 @import "tailwindcss";
 @tailwind utilities;
 
-
-
-/* ---------- THEME VARIABLES ---------- */
-:root {
+/* :root {
     --bg-color: #f3f4f6;
-    /* gray-100 */
     --text-color: #111827;
-    /* gray-900 */
     --header-bg: #ffffff;
-    /* white */
     --header-text: #111827;
     --button-bg: #e5e7eb;
-    /* gray-200 */
     --button-text: #111827;
     --button-hover-bg: #d1d5db;
     --input-bg: #ffffff;
@@ -25,14 +18,10 @@
 
 [data-theme="dark"] {
     --bg-color: #1f2937;
-    /* gray-900 */
     --text-color: #f9fafb;
-    /* gray-100 */
     --header-bg: #111827;
-    /* gray-800 */
     --header-text: #f9fafb;
     --button-bg: #374151;
-    /* gray-700 */
     --button-text: #f9fafb;
     --button-hover-bg: #4b5563;
     --input-bg: #1f2937;
@@ -40,9 +29,46 @@
     --input-border: #4b5563;
     --card-bg: #111827;
     --card-text: #f9fafb;
+} */
+
+
+:root {
+  --bg-color: #f3f4f6;
+  --text-color: #111827;
+  --header-bg: #ffffff;
+  --header-text: #111827;
+
+  /* darker button colors (still light) */
+  --button-bg: #d4d4d8;        /* gray-300 */
+  --button-text: #111827;
+  --button-hover-bg: #bdbdbf;  /* gray-400 */
+
+  --input-bg: #ffffff;
+  --input-text: #111827;
+  --input-border: #d1d5db;
+  --card-bg: #ffffff;
+  --card-text: #111827;
 }
 
-/* ---------- GLOBAL ELEMENTS ---------- */
+[data-theme="dark"] {
+  --bg-color: #1f2937;
+  --text-color: #f9fafb;
+  --header-bg: #111827;
+  --header-text: #f9fafb;
+
+  /* darker dark-mode buttons (still readable) */
+  --button-bg: #374151;        /* gray-700 */
+  --button-text: #f9fafb;
+  --button-hover-bg: #4b5563;  /* gray-600 */
+
+  --input-bg: #1f2937;
+  --input-text: #f9fafb;
+  --input-border: #4b5563;
+  --card-bg: #111827;
+  --card-text: #f9fafb;
+}
+
+
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -87,43 +113,3 @@ input {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
 }
-
-/* Keep Tailwind only for spacing, flex, grid, text sizes etc. */
-
-/* 
-
-:root {
-    --bg-color: #f3f4f6;
-    --text-color: #111827;
-    --header-bg: #ffffff;
-    --header-text: #111827;
-    --button-bg: #e5e7eb;
-    --button-text: #111827;
-}
-
-[data-theme="dark"] {
-    --bg-color: #1f2937;
-    --text-color: #f9fafb;
-    --header-bg: #111827;
-    --header-text: #f9fafb;
-    --button-bg: #374151;
-    --button-text: #f9fafb;
-}
-
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: all 0.3s ease;
-}
-
-header {
-    background-color: var(--header-bg);
-    color: var(--header-text);
-}
-
-button {
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    transition: all 0.3s ease;
-}
-*/

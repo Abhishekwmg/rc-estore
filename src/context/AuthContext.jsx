@@ -1,70 +1,4 @@
-// src/context/AuthContext.jsx
-// import { createContext, useContext, useEffect, useState } from "react";
-// import { auth } from "../firebase/firebase";
-// import {
-//   signInWithEmailAndPassword,
-//   createUserWithEmailAndPassword,
-//   signOut,
-//   signInWithPopup,
-//   updateProfile,
-// } from "firebase/auth";
-// import { googleProvider } from "../firebase/firebase";
-
-// const AuthContext = createContext();
-
-// export const AuthProvider = ({ children }) => {
-//   const [user, setUser] = useState(null);
-
-//   // Track auth state
-//   useEffect(() => {
-//     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
-//       setUser(currentUser);
-//     });
-//     return () => unsubscribe();
-//   }, []);
-
-//   // Email login
-//   const loginWithEmail = (email, password) =>
-//     signInWithEmailAndPassword(auth, email, password);
-
-//   // Email signup with username
-//   const signupWithEmail = async (username, email, password) => {
-//     const userCredential = await createUserWithEmailAndPassword(
-//       auth,
-//       email,
-//       password,
-//     );
-//     // Update displayName
-//     await updateProfile(userCredential.user, { displayName: username });
-//     setUser({ ...userCredential.user }); // update local state
-//     return userCredential;
-//   };
-
-//   // Google login
-//   const loginWithGoogle = async () => {
-//     const result = await signInWithPopup(auth, googleProvider);
-//     setUser(result.user);
-//     return result.user;
-//   };
-
-//   // Logout
-//   const logout = async () => {
-//     await signOut(auth);
-//     setUser(null);
-//   };
-
-//   return (
-//     <AuthContext.Provider
-//       value={{ user, loginWithEmail, signupWithEmail, loginWithGoogle, logout }}
-//     >
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
-
-// export const useAuth = () => useContext(AuthContext);
-
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import { auth } from "../firebase/firebase";
 import {
   signInWithEmailAndPassword,
@@ -77,50 +11,87 @@ import { googleProvider } from "../firebase/firebase";
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // 🔹 add loading state
+const initialState = {
+  user: null,
+  loading: true,
+};
 
-  // Track auth state
+const authReducer = (state, action) => {
+  switch (action.type) {
+    case "SET_USER":
+      return { ...state, user: action.payload, loading: false };
+    case "SET_LOADING":
+      return { ...state, loading: action.payload };
+    case "LOGOUT":
+      return { ...state, user: null };
+    default:
+      return state;
+  }
+};
+
+export const AuthProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(authReducer, initialState);
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
-      setUser(currentUser);
-      setLoading(false); // 🔹 finished initializing
+      dispatch({ type: "SET_USER", payload: currentUser });
     });
     return () => unsubscribe();
   }, []);
 
-  // Email login
-  const loginWithEmail = (email, password) =>
-    signInWithEmailAndPassword(auth, email, password);
+  const loginWithEmail = async (email, password) => {
+    try {
+      const result = await signInWithEmailAndPassword(auth, email, password);
+      dispatch({ type: "SET_USER", payload: result.user });
+      return result.user;
+    } catch (err) {
+      console.error("Login failed:", err);
+      throw new Error(err.message || "Login failed");
+    }
+  };
 
-  // Email signup with username
   const signupWithEmail = async (username, email, password) => {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
-    await updateProfile(userCredential.user, { displayName: username });
-    return userCredential;
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      await updateProfile(userCredential.user, { displayName: username });
+      dispatch({ type: "SET_USER", payload: userCredential.user });
+      return userCredential.user;
+    } catch (err) {
+      console.error("Signup failed:", err);
+      throw new Error(err.message || "Signup failed");
+    }
   };
 
-  // Google login
   const loginWithGoogle = async () => {
-    const result = await signInWithPopup(auth, googleProvider);
-    return result.user;
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      dispatch({ type: "SET_USER", payload: result.user });
+      return result.user;
+    } catch (err) {
+      console.error("Google login failed:", err);
+      throw new Error(err.message || "Google login failed");
+    }
   };
 
-  // Logout
   const logout = async () => {
-    await signOut(auth);
+    try {
+      await signOut(auth);
+      dispatch({ type: "LOGOUT" });
+    } catch (err) {
+      console.error("Logout failed:", err);
+      throw new Error(err.message || "Logout failed");
+    }
   };
 
   return (
     <AuthContext.Provider
       value={{
-        user,
-        loading,
+        user: state.user,
+        loading: state.loading,
         loginWithEmail,
         signupWithEmail,
         loginWithGoogle,
