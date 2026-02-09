@@ -1,34 +1,33 @@
-// src/hooks/useProducts.js
 import { useState, useCallback } from "react";
 import {
   fetchProducts,
   searchProducts,
   fetchProductById,
 } from "../api/products";
+import { useError } from "../context/ErrorContext";
 
-/**
- * Custom hook to manage products
- */
 export const useProducts = () => {
-  const [products, setProducts] = useState([]); // array of products
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Fetch all products
+  const { setError: setGlobalError } = useError();
+
   const fetchAllProducts = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const data = await fetchProducts(); // ✅ updated
+      const data = await fetchProducts();
       setProducts(data);
     } catch (err) {
-      setError(err.message || "Failed to fetch products");
+      const message = err.message || "Failed to fetch products";
+      setError(message);  
+      setGlobalError(err);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [setGlobalError]);
 
-  // Search products by query
   const search = useCallback(async (query) => {
     setLoading(true);
     setError(null);
@@ -36,26 +35,29 @@ export const useProducts = () => {
       const data = await searchProducts(query);
       setProducts(data);
     } catch (err) {
-      setError(err.message || "Failed to search products");
+      const message = err.message || "Failed to search products";
+      setError(message);
+      setGlobalError(err);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [setGlobalError]);
 
-  // Fetch single product by id
   const fetchProductByIdHook = useCallback(async (id) => {
     setLoading(true);
     setError(null);
     try {
-      const data = await fetchProductById(id); // ✅ updated
+      const data = await fetchProductById(id);
       return data;
     } catch (err) {
-      setError(err.message || "Failed to fetch product");
+      const message = err.message || "Failed to fetch product";
+      setError(message);
+      setGlobalError(err);
       return null;
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [setGlobalError]);
 
   return {
     products,

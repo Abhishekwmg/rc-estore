@@ -1,4 +1,4 @@
-//util goes here
+
 export const validateForm = (formData) => {
   const newErrors = {};
   if (!formData.fullName.trim()) newErrors.fullName = "Full Name is required";
@@ -11,7 +11,6 @@ export const validateForm = (formData) => {
   if (!formData.state.trim()) newErrors.state = "State is required";
   if (!formData.zip.trim()) newErrors.zip = "ZIP Code is required";
 
-  // Payment validation
   if (!formData.cardNumber.trim())
     newErrors.cardNumber = "Card Number is required";
   else if (!/^\d{16}$/.test(formData.cardNumber.replace(/\s+/g, "")))

@@ -1,4 +1,3 @@
-// src/components/UI/Select.jsx
 import React from "react";
 
 const Select = ({ label, value, onChange, children, className = "" }) => {
