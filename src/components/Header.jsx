@@ -106,17 +106,17 @@ export const Header = () => {
               )}
             </Link> */}
             <Link
-                to="/cart"
-                onClick={() => setMenuOpen(false)}
-                className="relative px-3 py-2 rounded flex items-center justify-center bg-[var(--button-bg)] text-[var(--button-text)] hover:bg-[var(--button-hover-bg)] transition"
-              >
-                <ShoppingCart />
-                {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-green-900 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
-                    {cartCount}
-                  </span>
-                )}
-              </Link>
+              to="/cart"
+              onClick={() => setMenuOpen(false)}
+              className="relative px-3 py-2 rounded flex items-center justify-center bg-[var(--button-bg)] text-[var(--button-text)] hover:bg-[var(--button-hover-bg)] transition"
+            >
+              <ShoppingCart />
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-green-900 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
 
             <div className="flex items-center space-x-2">
               {profileImage ? (
@@ -220,17 +220,6 @@ export const Header = () => {
               >
                 Orders
               </Link>
-              {/* <Link
-                to="/cart"
-                onClick={() => setMenuOpen(false)}
-                className="relative px-3 py-2 rounded bg-green-50 text-white flex items-center justify-center"
-              >
-                <ShoppingCart /> {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
-                    {cartCount}
-                  </span>
-                )}
-              </Link> */}
               <Link
                 to="/cart"
                 onClick={() => setMenuOpen(false)}
