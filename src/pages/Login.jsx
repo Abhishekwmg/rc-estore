@@ -6,7 +6,7 @@ import InputField from "../components/ui/InputField";
 import Button from "../components/ui/Button";
 import Alert from "../components/ui/Alert";
 import googleIcon from "../assets/google.png";
-import {Loader} from 'lucide-react'
+import { Loader } from "lucide-react";
 
 export default function Login() {
   const { loginWithEmail, loginWithGoogle } = useAuth();
@@ -17,15 +17,30 @@ export default function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // const handleEmailLogin = async (e) => {
+  //   e.preventDefault();
+  //   setError("");
+  //   setLoading(true);
+  //   try {
+  //     await loginWithEmail(email, password);
+  //     navigate("/");
+  //   } catch (err) {
+  //     setError(err.message);
+  //   }
+  // };
+
   const handleEmailLogin = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
+
     try {
       await loginWithEmail(email, password);
       navigate("/");
     } catch (err) {
       setError(err.message);
+    } finally {
+      setLoading(false); // ✅ ALWAYS reset loading
     }
   };
 
@@ -76,7 +91,7 @@ export default function Login() {
             className="px-4 py-2 text-sm flex-1 sm:flex-none"
             disabled={loading}
           >
-             {loading ? <Loader /> : "Login"}
+            {loading ? <Loader /> : "Login"}
           </Button>
           <Button
             type="button"
