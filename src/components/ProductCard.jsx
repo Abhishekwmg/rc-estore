@@ -4,8 +4,7 @@ import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/cartSlice";
 import { useAuth } from "../context/AuthContext";
-import { toast } from 'react-toastify';
-
+import { toast } from "react-toastify";
 
 function ProductCard({ product }) {
   const { setError: setGlobalError } = useError();
@@ -36,19 +35,22 @@ function ProductCard({ product }) {
         title: product.title,
         price: product.price,
         thumbnail: product.thumbnail || product.image,
-      })
+      }),
     );
 
     toast.success("Product added to cart!");
   }, [dispatch, navigate, product, user]);
 
   return (
-    <div className="border rounded p-4 shadow hover:shadow-lg transition flex flex-col justify-between">
+    <div
+      style={{ backgroundColor: "white" }}
+      className="border border-gray-300 rounded-xl p-4  shadow hover:shadow-xl transition flex flex-col justify-between"
+    >
       <Link to={`/product/${product.id}`}>
         <img
           src={product.thumbnail || product.image}
           alt={product.title}
-          className="w-full h-40 object-cover mb-2"
+          className="w-full h-40 object-contain mb-2"
         />
         <h3 className="font-bold">{product.title}</h3>
         <p className="text-gray-600">${product.price}</p>

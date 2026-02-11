@@ -58,7 +58,7 @@ export default function Contact() {
   };
 
   return (
-    <Card className="max-w-4xl mx-auto p-6">
+    <Card className="max-w-xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">Contact Us</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -111,4 +111,3 @@ export default function Contact() {
     </Card>
   );
 }
-

@@ -1,3 +1,5 @@
+import { TriangleAlert } from "lucide-react";
+
 export default function InputField({
   type = "text",
   name,
@@ -11,7 +13,7 @@ export default function InputField({
   label = "",
   error = "",
 }) {
-   const baseStyles = `
+  const baseStyles = `
     w-full 
     border 
     rounded 
@@ -42,7 +44,7 @@ export default function InputField({
           required={required}
           autoFocus={autoFocus}
           disabled={disabled}
-           className={`${baseStyles} ${className}`}
+          className={`${baseStyles} ${className}`}
           style={{
             backgroundColor: "var(--input-bg)",
             color: "var(--input-text)",
@@ -65,7 +67,12 @@ export default function InputField({
         />
       )}
 
-      {error && <p className="text-red-600 text-sm mt-1">{error}</p>}
+      {error && (
+        <div>
+          <TriangleAlert size={15} className="inline text-red-500 mx-1" />
+          <p className="text-red-500 text-sm mt-1 inline">{error}</p>
+        </div>
+      )}
     </div>
   );
 }
