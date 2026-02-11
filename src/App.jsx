@@ -20,6 +20,7 @@ const Signup = lazy(() => import("./pages/Signup"));
 const Orders = lazy(() => import("./pages/Orders"));
 const Contact = lazy(() => import("./pages/Contact"));
 const PageLoader = lazy(() => import("./components/PageLoader"));
+const WishList = lazy(()=> import("./pages/WishList"));
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,16 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoader />}>
             <ProtectedRoute>
               <Cart />
+            </ProtectedRoute>
+          </Suspense>
+        ),
+      },
+      {
+        path: "/wishlist",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <ProtectedRoute>
+              <WishList />
             </ProtectedRoute>
           </Suspense>
         ),

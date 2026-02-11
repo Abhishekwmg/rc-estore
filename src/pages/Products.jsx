@@ -35,7 +35,7 @@ export default function Products() {
       }
     };
     loadCategories();
-  }, [setGlobalError]);
+  }, [setGlobalError]); 
 
   const handleSearch = useCallback(async () => {
     setCurrentPage(1);

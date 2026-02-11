@@ -1,177 +1,80 @@
 @import "tailwindcss";
 @tailwind utilities;
 
-/* :root {
-    --bg-color: #f3f4f6;
-    --text-color: #111827;
-    --header-bg: #ffffff;
-    --header-text: #111827;
-    --button-bg: #e5e7eb;
-    --button-text: #111827;
-    --button-hover-bg: #d1d5db;
-    --input-bg: #ffffff;
-    --input-text: #111827;
-    --input-border: #d1d5db;
-    --card-bg: #ffffff;
-    --card-text: #111827;
-}
-
-[data-theme="dark"] {
-    --bg-color: #1f2937;
-    --text-color: #f9fafb;
-    --header-bg: #111827;
-    --header-text: #f9fafb;
-    --button-bg: #374151;
-    --button-text: #f9fafb;
-    --button-hover-bg: #4b5563;
-    --input-bg: #1f2937;
-    --input-text: #f9fafb;
-    --input-border: #4b5563;
-    --card-bg: #111827;
-    --card-text: #f9fafb;
-} */
-
-
-/*working fine:10/02/2026  */
-/* :root {
-    --bg-color: #f3f4f6;
-    --text-color: #111827;
-    --header-bg: #ffffff;
-    --header-text: #111827;
-
-    --button-bg: #d4d4d8;
-    --button-text: #111827;
-    --button-hover-bg: #bdbdbf;
-
-    --input-bg: #ffffff;
-    --input-text: #111827;
-    --input-border: #d1d5db;
-    --card-bg: #ffffff;
-    --card-text: #111827;
-}
-
-[data-theme="dark"] {
-    --bg-color: #1f2937;
-    --text-color: #f9fafb;
-    --header-bg: #111827;
-    --header-text: #f9fafb;
-
-    --button-bg: #374151;
-    --button-text: #f9fafb;
-    --button-hover-bg: #4b5563;
-
-    --input-bg: #1f2937;
-    --input-text: #f9fafb;
-    --input-border: #4b5563;
-    --card-bg: #111827;
-    --card-text: #f9fafb;
-} */
-
 :root {
-    /* Backgrounds */
-    --bg-color: #f1faee;
-    /* honeydew (soft premium white) */
-    --header-bg: #ffffff;
-    /* clean header */
-    --card-bg: #ffffff;
-    /* cards stay white for clarity */
-
-    /* Text */
-    --text-color: #1d3557;
-    /* oxford-navy (strong premium contrast) */
-    --header-text: #1d3557;
-    --card-text: #1d3557;
-
-    /* Buttons (Primary Accent) */
-    --button-bg: #457b9d;
-    /* cerulean */
-    --button-text: #ffffff;
-    --button-hover-bg: #1d3557;
-    /* oxford-navy */
-
-    /* Inputs */
-    --input-bg: #ffffff;
-    --input-text: #1d3557;
-    --input-border: #a8dadc;
-    /* frosted-blue */
+  --bg-color: #f8f9fb;
+  --header-bg: #ffffff;
+  --card-bg: #ffffff;
+  --text-color: #1f2933;
+  --header-text: #111827;
+  --card-text: #1f2933;
+  --button-bg: #3b6ea8;
+  --button-text: #ffffff;
+  --button-hover-bg: #2f5682;
+  --input-bg: #ffffff;
+  --input-text: #1f2933;
+  --input-border: #d0d7e2;
 }
-
-
 
 [data-theme="dark"] {
-    /* Backgrounds */
-    --bg-color: #0b1a2e;
-    /* midnight-navy */
-    --header-bg: #10243e;
-    /* deep-navy */
-    --card-bg: #152f4a;
-    /* slate-navy */
+  --bg-color: #0f1722;
+  --header-bg: #131c2b;
+  --card-bg: #182233;
 
-    /* Text */
-    --text-color: #eaf4ff;
+  --text-color: #e6edf5;
+  --header-text: #f1f5f9;
+  --card-text: #e6edf5;
 
-    /* soft ice white */
-    --header-text: #eaf4ff;
-    --card-text: #eaf4ff;
+  --button-bg: #3b6ea8;
+  --button-text: #ffffff;
+  --button-hover-bg: #2f5682;
 
-    /* Buttons (Primary Accent) */
-    --button-bg: #457b9d;
-    /*  */
-    /* SAME cerulean for brand consistency */
-    --button-text: #ffffff;
-    --button-hover-bg: #6bbfd0;
-    /* frosted cyan glow hover */
-
-    /* Inputs */
-    --input-bg: #10243e;
-    --input-text: #eaf4ff;
-    --input-border: #3a6b8f;
-    /* cerulean-dark */
+  --input-bg: #131c2b;
+  --input-text: #e6edf5;
+  --input-border: #2a3a52;
 }
-
-
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: 'Inter', sans-serif;
-    transition: all 0.3s ease;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+font-family: 'Arial';
 }
 
 header {
-    background-color: var(--header-bg);
-    color: var(--header-text);
-    transition: all 0.3s ease;
+  background-color: var(--header-bg);
+  color: var(--header-text);
+  transition: all 0.3s ease;
 }
 
 button {
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border-radius: 0.375rem;
-    padding: 0.5rem 1rem;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 button:hover {
-    background-color: var(--button-hover-bg);
+  background-color: var(--button-hover-bg);
 }
 
 input {
-    background-color: var(--input-bg);
-    color: var(--input-text);
-    border: 1px solid var(--input-border);
-    border-radius: 0.375rem;
-    padding: 0.5rem 0.75rem;
-    transition: all 0.2s ease;
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  border: 1px solid var(--input-border);
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  transition: all 0.2s ease;
 }
 
 .card {
-    background-color: var(--card-bg);
-    color: var(--card-text);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
+  background-color: var(--card-bg);
+  color: var(--card-text);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
 }

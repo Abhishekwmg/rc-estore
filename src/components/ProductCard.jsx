@@ -1,16 +1,27 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useError } from "../context/ErrorContext";
 import React, { useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleWishlist } from "../redux/wishlistSlice";
 import { addToCart } from "../redux/cartSlice";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
+import { Heart } from "lucide-react";
 
 function ProductCard({ product }) {
   const { setError: setGlobalError } = useError();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const wishlistItems = useSelector((state) => state.wishlist.items);
+
+  const isFavourite = wishlistItems.some((item) => item.id === product.id);
+
+  const handleToggleWishlist = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dispatch(toggleWishlist(product));
+  };
 
   if (!product) {
     const error = new Error("Product data is missing!");
@@ -42,11 +53,15 @@ function ProductCard({ product }) {
   }, [dispatch, navigate, product, user]);
 
   return (
-    <div
-      style={{ backgroundColor: "white" }}
-      className="border border-gray-300 rounded-xl p-4  shadow hover:shadow-xl transition flex flex-col justify-between"
-    >
+    <div className="bg-[var(--card-bg)] border border-gray-300 rounded-xl p-4  shadow hover:shadow-xl transition flex flex-col justify-between">
       <Link to={`/product/${product.id}`}>
+        <Heart
+          size={22}
+          onClick={handleToggleWishlist}
+          className={`cursor-pointer transition ${
+            isFavourite ? "fill-red-500 text-red-500" : "text-gray-400"
+          }`}
+        />
         <img
           src={product.thumbnail || product.image}
           alt={product.title}

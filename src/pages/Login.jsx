@@ -6,7 +6,7 @@ import InputField from "../components/ui/InputField";
 import Button from "../components/ui/Button";
 import Alert from "../components/ui/Alert";
 import googleIcon from "../assets/google.png";
-import { Loader } from "lucide-react";
+import { ClipLoader } from "react-spinners";
 
 export default function Login() {
   const { loginWithEmail, loginWithGoogle } = useAuth();
@@ -80,7 +80,11 @@ export default function Login() {
             className="px-4 py-2 text-sm flex-1 sm:flex-none"
             disabled={loading}
           >
-            {loading ? <Loader /> : "Login"}
+            {loading ? (
+              <ClipLoader size={20} color="#fff" loading={true} />
+            ) : (
+              "Login"
+            )}
           </Button>
           <Button
             type="button"

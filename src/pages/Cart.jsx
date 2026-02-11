@@ -64,51 +64,6 @@ export default function Cart() {
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">Your Cart</h2>
-      {/* <div className="space-y-4">
-        {cartItems.map((item) => (
-          <div
-            key={item.productId}
-            className="flex items-center justify-between p-4 border rounded shadow"
-          >
-            <div className="flex items-center space-x-4">
-              <img
-                src={item.thumbnail}
-                alt={item.title}
-                className="w-20 h-20 object-cover rounded"
-              />
-              <div>
-                <h3 className="font-bold">{item.title}</h3>
-                <p>${item.price} each</p>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-2">
-              <button
-                onClick={() => handleDecrease(item)}
-                className="px-2 py-1 bg-gray-200 rounded"
-              >
-                -
-              </button>
-              <span>{item.quantity}</span>
-              <button
-                onClick={() => handleIncrease(item)}
-                className="px-2 py-1 bg-gray-200 rounded"
-              >
-                +
-              </button>
-            </div>
-
-            <div className="font-bold">${(item.price * item.quantity).toFixed(2)}</div>
-
-            <button
-              onClick={() => handleRemove(item)}
-              className="ml-4 px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition"
-            >
-              Remove
-            </button>
-          </div>
-        ))}
-      </div> */}
       <div className="space-y-4">
         {cartItems.map((item) => (
           <div

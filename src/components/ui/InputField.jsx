@@ -25,14 +25,14 @@ export default function InputField({
   `;
   return (
     <div className="flex flex-col">
-      {label && (
+      {/* {label && (
         <label
           htmlFor={name}
           className="mb-1 font-medium text-gray-700 dark:text-gray-300"
         >
           {label}
         </label>
-      )}
+      )} */}
 
       {type === "textarea" ? (
         <textarea

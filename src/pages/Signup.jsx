@@ -5,6 +5,7 @@ import Card from "../components/ui/Card";
 import InputField from "../components/ui/InputField";
 import Button from "../components/ui/Button";
 import Alert from "../components/ui/Alert";
+import { ClipLoader } from "react-spinners";
 
 export default function Signup() {
   const { signupWithEmail } = useAuth();
@@ -15,15 +16,19 @@ export default function Signup() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSignup = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
     try {
       await signupWithEmail(username, email, password);
       navigate("/");
     } catch (err) {
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -62,7 +67,13 @@ export default function Signup() {
           required
         />
 
-        <Button type="submit">Signup</Button>
+        <Button type="submit">
+          {loading ? (
+            <ClipLoader size={20} color="#fff" loading={true} />
+          ) : (
+            "Signup"
+          )}
+        </Button>
       </form>
     </Card>
   );

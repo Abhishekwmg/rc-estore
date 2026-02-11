@@ -1,15 +1,27 @@
 import { useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { useAuth } from "../context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
-import { User, Moon, Sun, Rotate3d, ShoppingCart, Menu, X } from "lucide-react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import {
+  User,
+  Moon,
+  Sun,
+  Rotate3d,
+  ShoppingCart,
+  Menu,
+  X,
+  Heart,
+} from "lucide-react";
 import { useSelector } from "react-redux";
+import NavLinks from "../components/ui/NavLinks";
 
 export const Header = () => {
   const { darkMode, dispatch } = useTheme();
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const cartItems = useSelector((state) => state.cart.items);
+  const wishlistCount = useSelector((state) => state.wishlist.items.length);
+
   const cartCount = cartItems.length;
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -47,39 +59,21 @@ export const Header = () => {
 
       <div className="hidden md:flex items-center space-x-6">
         <nav className="flex space-x-4 lg:space-x-6">
-          <Link
-            to="/products"
-            className="hover:text-indigo-500 transition-colors"
-          >
-            Products
-          </Link>
-          <Link
-            to="/contact"
-            className="hover:text-indigo-500 transition-colors"
-          >
-            Contact
-          </Link>
+          <NavLinks toPath="/products">Products</NavLinks>
+          <NavLinks toPath="/contact">Contact</NavLinks>
         </nav>
 
         {!user && (
           <>
             <Link
               to="/login"
-              style={{
-                backgroundColor: "var(--button-bg)",
-                color: "var(--button-text)",
-              }}
-              className="px-3 py-2 rounded"
+              className="px-3 py-2 rounded bg-[var(--button-bg)] text-[var(--button-text)]"
             >
               Login
             </Link>
             <Link
               to="/signup"
-              style={{
-                backgroundColor: "var(--button-bg)",
-                color: "var(--button-text)",
-              }}
-              className="px-3 py-2 rounded"
+              className="px-3 py-2 rounded bg-[var(--button-bg)] text-[var(--button-text)]"
             >
               Signup
             </Link>
@@ -88,23 +82,7 @@ export const Header = () => {
 
         {user && (
           <>
-            <Link
-              to="/orders"
-              className="hover:text-indigo-500 transition-colors"
-            >
-              Orders
-            </Link>
-            {/* <Link
-              to="/cart"
-              className="relative px-3 py-2 rounded bg-green-600 text-white flex items-center space-x-1"
-            >
-              <ShoppingCart className="w-5 h-5" />
-              {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
-                  {cartCount}
-                </span>
-              )}
-            </Link> */}
+            <NavLinks toPath="/orders">Orders</NavLinks>
             <Link
               to="/cart"
               onClick={() => setMenuOpen(false)}
@@ -117,7 +95,19 @@ export const Header = () => {
                 </span>
               )}
             </Link>
+            <Link
+              to="/wishlist"
+              onClick={() => setMenuOpen(false)}
+              className="relative px-3 py-2 rounded flex items-center justify-center bg-[var(--button-bg)] text-[var(--button-text)] hover:bg-[var(--button-hover-bg)] transition"
+            >
+              <Heart />
 
+              {wishlistCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-700 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
             <div className="flex items-center space-x-2">
               {profileImage ? (
                 <img
@@ -229,6 +219,19 @@ export const Header = () => {
                 {cartCount > 0 && (
                   <span className="absolute -top-1 -right-1 bg-green-800 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
                     {cartCount}
+                  </span>
+                )}
+              </Link>
+              <Link
+                to="/wishlist"
+                onClick={() => setMenuOpen(false)}
+                className="relative px-3 py-2 rounded flex items-center justify-center bg-[var(--button-bg)] text-[var(--button-text)] hover:bg-[var(--button-hover-bg)] transition"
+              >
+                <Heart />
+
+                {wishlistCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-700 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                    {wishlistCount}
                   </span>
                 )}
               </Link>
