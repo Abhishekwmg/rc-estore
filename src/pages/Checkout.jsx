@@ -150,7 +150,7 @@ export default function Checkout() {
             ))}
 
             <h3 className="font-semibold mt-4">Payment Information</h3>
-            <div>
+            {/* <div>
               <input
                 name="cardNumber"
                 type="text"
@@ -162,6 +162,15 @@ export default function Checkout() {
               {errors.cardNumber && (
                 <p className="text-red-500 text-sm mt-1">{errors.cardNumber}</p>
               )}
+            </div> */}
+            <div className="flex-1">
+              <InputField
+                name="cardNumber"
+                placeholder="Card Number (16 digits)"
+                value={formData.cardNumber}
+                onChange={handleChange}
+                error={errors.cardNumber}
+              />
             </div>
 
             <div className="flex gap-2">

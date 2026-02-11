@@ -32,41 +32,103 @@
 } */
 
 
-:root {
-  --bg-color: #f3f4f6;
-  --text-color: #111827;
-  --header-bg: #ffffff;
-  --header-text: #111827;
+/*working fine:10/02/2026  */
+/* :root {
+    --bg-color: #f3f4f6;
+    --text-color: #111827;
+    --header-bg: #ffffff;
+    --header-text: #111827;
 
-  /* darker button colors (still light) */
-  --button-bg: #d4d4d8;        /* gray-300 */
-  --button-text: #111827;
-  --button-hover-bg: #bdbdbf;  /* gray-400 */
+    --button-bg: #d4d4d8;
+    --button-text: #111827;
+    --button-hover-bg: #bdbdbf;
 
-  --input-bg: #ffffff;
-  --input-text: #111827;
-  --input-border: #d1d5db;
-  --card-bg: #ffffff;
-  --card-text: #111827;
+    --input-bg: #ffffff;
+    --input-text: #111827;
+    --input-border: #d1d5db;
+    --card-bg: #ffffff;
+    --card-text: #111827;
 }
 
 [data-theme="dark"] {
-  --bg-color: #1f2937;
-  --text-color: #f9fafb;
-  --header-bg: #111827;
-  --header-text: #f9fafb;
+    --bg-color: #1f2937;
+    --text-color: #f9fafb;
+    --header-bg: #111827;
+    --header-text: #f9fafb;
 
-  /* darker dark-mode buttons (still readable) */
-  --button-bg: #374151;        /* gray-700 */
-  --button-text: #f9fafb;
-  --button-hover-bg: #4b5563;  /* gray-600 */
+    --button-bg: #374151;
+    --button-text: #f9fafb;
+    --button-hover-bg: #4b5563;
 
-  --input-bg: #1f2937;
-  --input-text: #f9fafb;
-  --input-border: #4b5563;
-  --card-bg: #111827;
-  --card-text: #f9fafb;
+    --input-bg: #1f2937;
+    --input-text: #f9fafb;
+    --input-border: #4b5563;
+    --card-bg: #111827;
+    --card-text: #f9fafb;
+} */
+
+:root {
+    /* Backgrounds */
+    --bg-color: #f1faee;
+    /* honeydew (soft premium white) */
+    --header-bg: #ffffff;
+    /* clean header */
+    --card-bg: #ffffff;
+    /* cards stay white for clarity */
+
+    /* Text */
+    --text-color: #1d3557;
+    /* oxford-navy (strong premium contrast) */
+    --header-text: #1d3557;
+    --card-text: #1d3557;
+
+    /* Buttons (Primary Accent) */
+    --button-bg: #457b9d;
+    /* cerulean */
+    --button-text: #ffffff;
+    --button-hover-bg: #1d3557;
+    /* oxford-navy */
+
+    /* Inputs */
+    --input-bg: #ffffff;
+    --input-text: #1d3557;
+    --input-border: #a8dadc;
+    /* frosted-blue */
 }
+
+
+
+[data-theme="dark"] {
+    /* Backgrounds */
+    --bg-color: #0b1a2e;
+    /* midnight-navy */
+    --header-bg: #10243e;
+    /* deep-navy */
+    --card-bg: #152f4a;
+    /* slate-navy */
+
+    /* Text */
+    --text-color: #eaf4ff;
+
+    /* soft ice white */
+    --header-text: #eaf4ff;
+    --card-text: #eaf4ff;
+
+    /* Buttons (Primary Accent) */
+    --button-bg: #457b9d;
+    /*  */
+    /* SAME cerulean for brand consistency */
+    --button-text: #ffffff;
+    --button-hover-bg: #6bbfd0;
+    /* frosted cyan glow hover */
+
+    /* Inputs */
+    --input-bg: #10243e;
+    --input-text: #eaf4ff;
+    --input-border: #3a6b8f;
+    /* cerulean-dark */
+}
+
 
 
 body {

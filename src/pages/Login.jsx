@@ -17,17 +17,7 @@ export default function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // const handleEmailLogin = async (e) => {
-  //   e.preventDefault();
-  //   setError("");
-  //   setLoading(true);
-  //   try {
-  //     await loginWithEmail(email, password);
-  //     navigate("/");
-  //   } catch (err) {
-  //     setError(err.message);
-  //   }
-  // };
+  console.log(error);
 
   const handleEmailLogin = async (e) => {
     e.preventDefault();
@@ -40,7 +30,7 @@ export default function Login() {
     } catch (err) {
       setError(err.message);
     } finally {
-      setLoading(false); // ✅ ALWAYS reset loading
+      setLoading(false);
     }
   };
 
@@ -60,7 +50,6 @@ export default function Login() {
   return (
     <Card className="max-w-md w-full mx-auto mt-10 p-6 sm:p-8 md:p-10">
       <h2 className="text-xl sm:text-2xl font-bold mb-4 text-center">Login</h2>
-
       {error && <Alert type="error" message={error} />}
       {loading && (
         <p className="text-center text-sm text-gray-500 mb-4">
@@ -105,7 +94,7 @@ export default function Login() {
               alt="login-with-google"
               className="w-4 h-4 sm:w-5 sm:h-5"
             />
-            Google
+            Login with Google
           </Button>
         </div>
       </form>

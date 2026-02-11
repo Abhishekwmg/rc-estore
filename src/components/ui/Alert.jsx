@@ -29,7 +29,6 @@
 
 // export default Alert;
 
-
 // src/components/UI/Alert.jsx
 import React from "react";
 

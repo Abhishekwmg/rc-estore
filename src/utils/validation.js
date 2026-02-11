@@ -1,4 +1,3 @@
-
 export const validateForm = (formData) => {
   const newErrors = {};
   if (!formData.fullName.trim()) newErrors.fullName = "Full Name is required";

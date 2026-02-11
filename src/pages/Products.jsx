@@ -7,7 +7,7 @@ import Button from "../components/ui/Button";
 import Select from "../components/ui/Select";
 import Alert from "../components/ui/Alert";
 import { useError } from "../context/ErrorContext";
-import {PRODUCTS_PER_PAGE} from '../utils/constants'
+import { PRODUCTS_PER_PAGE } from "../utils/constants";
 
 export default function Products() {
   const { products, loading, error, fetchAllProducts, search } = useProducts();
@@ -144,8 +144,9 @@ export default function Products() {
           ))
         ) : (
           <p className="col-span-full text-center text-gray-600">
-  We couldn't find any products matching your search. Try a different keyword.
-</p>
+            We couldn't find any products matching your search. Try a different
+            keyword.
+          </p>
         )}
       </div>
 
@@ -209,4 +210,3 @@ export default function Products() {
     </div>
   );
 }
-
