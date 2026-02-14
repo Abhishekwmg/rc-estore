@@ -9,10 +9,7 @@ export default function GlobalError() {
   return (
     <div className="fixed top-4 right-4 bg-red-500 text-white p-4 rounded shadow z-50">
       <p>{error.message || "Something went wrong!"}</p>
-      <button
-        className="ml-2 underline"
-        onClick={clearError}
-      >
+      <button className="ml-2 underline" onClick={clearError}>
         Dismiss
       </button>
     </div>

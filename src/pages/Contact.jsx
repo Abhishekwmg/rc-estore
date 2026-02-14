@@ -84,7 +84,6 @@ export default function Contact() {
           placeholder="Phone Number (optional)"
           value={formData.phone}
           onChange={handleChange}
-          error={errors.phone}
         />
 
         <InputField
